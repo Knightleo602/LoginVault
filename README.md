@@ -1,2 +1,2 @@
 # LoginVault
- Um aplicativo no python para armazenar dados de uma conta
+ Um aplicativo no python para armazenar dados de varias contas
