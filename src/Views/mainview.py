@@ -4,7 +4,6 @@ from .addWindow import showAddWindow
 def createMainView(parent):
     frame = Frame(parent, bg='#1e8f77')
     
-    frame.columnconfigure(0, weight=0)
     frame.columnconfigure((2, 3, 4), weight=5, minsize=20) # o 6 e a quantidade de colunas
     frame.columnconfigure(1, weight=1, minsize=55)
     

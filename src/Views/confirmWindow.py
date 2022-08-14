@@ -12,8 +12,8 @@ def showConfirmWindow(parent, msg, function):
     noButton = Button(confirmmenu, text="Não", command=leaveConfirm)
     
     msg.pack(expand=True, pady=(20, 0), padx=20)
-    yesButton.pack(expand=True, side=LEFT, pady=(20, 20))
     noButton.pack(expand=True, side=LEFT, pady=(20, 20))
+    yesButton.pack(expand=True, side=LEFT, pady=(20, 20))
     confirmmenu.grab_set()
     confirmmenu.attributes('-topmost', True)
     confirmmenu.mainloop()
