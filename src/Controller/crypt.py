@@ -1,15 +1,23 @@
 from Crypto.Cipher import AES
-from Crypto.Hash import SHA256
-from Crypto import Random
+from bcrypt import hashpw, gensalt
 
-class AES:
+# pip install pycryptodome
+# pip instll bcrypt
         
-    def __init__(self, key):
-        self.key = SHA256.new(key)
-        
-        
-    def encrypt(self, text):
-        self.cipher = AES.new(self.key, AES.MODE_EAX)
+def encrypt(text, key):
+    global nonce, tag
+    cipher = AES.new(key, AES.MODE_EAX)
+    encryptedtext = cipher.encrypt(text)
+    return encryptedtext
+
+def decrypt(encryptedtext, key, nonce):
+    cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+    plaintext = cipher.decrypt(encryptedtext)
+    try: 
+        cipher.verify(tag)
+        return plaintext
+    except:
+        return False
     
-def getHash(text, salt):
-    return SHA256.new((text + salt).encode()).digest()
+def getHash(text):
+    return hashpw(text.encode('utf_8'), gensalt())

@@ -41,7 +41,7 @@ def buildLoginsView():
     
     for i in loadLogins():
         Label(frame, text=i.getUserName()).grid(row=rowCount, column=1, padx=(20, 20), pady=(10, 0), columnspan=2, sticky=EW)
-        Label(frame, text=i.getPassword()).grid(row=rowCount, column=3, padx=(0, 20), pady=(10, 0), columnspan=2, sticky=EW)
+        Label(frame, text="ssss").grid(row=rowCount, column=3, padx=(0, 20), pady=(10, 0), columnspan=2, sticky=EW)
         rowCount += 1
     
 

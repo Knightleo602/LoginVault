@@ -14,12 +14,6 @@ def createMainView(parent):
     createMenuBar(parent)
     createFolderView(paned)
     createLoginsView(paned)
-    
-    #frame.pack(side="left", fill="both", expand=True)
-    return paned
-    
-def getLogins(): # a ideia e ele pega e retorna os logins como um frame 
-    ...
 
-def expandLogin():
-    ...
+    return paned
+
