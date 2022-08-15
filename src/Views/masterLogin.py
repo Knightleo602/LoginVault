@@ -58,10 +58,10 @@ def login(root):
             frame.destroy()
             createMainView(root)
         else:
-            errorLabel.config(text="Usuario ou senha incorretos!")
+            errorLabel.config(text="Name or password Incorrect!")
             entryUsername.config(textvariable="")
     else:
-        errorLabel.config(text="Uso de characteres não permitidos!")
+        errorLabel.config(text="Invalid name or password!")
     
 def showPasswd():
     global passwdState, showPasswdButton, visiblePwdImage, hiddenPwdImage

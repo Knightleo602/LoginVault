@@ -2,7 +2,6 @@ from tkinter import *
 
 def showOptionsMenu(parent):
     frame = Toplevel(parent)
-    #frame.resizable(0,0)
     frame.title("")
     
     accountLabel = Label(frame, text="Account:")

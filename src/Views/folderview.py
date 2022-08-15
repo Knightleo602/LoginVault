@@ -27,9 +27,9 @@ def updateFolderView():
 def buildFolderView():
     global frame
     labelMain = Label(frame, text=master.loggedMaster.name + "'s vault", fg='#212121')
-    labelPastas = Label(frame, text="Pastas: ")
+    labelPastas = Label(frame, text="Folders: ")
     
-    newFolder = Button(frame, text="Nova Pasta", command=criarNovaPasta)
+    newFolder = Button(frame, text="New Folder", command=criarNovaPasta)
     
     labelMain.pack(anchor=NW, pady=(10, 30), padx=10)
     labelPastas.pack(anchor=NW, pady=(10, 20), padx=20)
@@ -37,7 +37,7 @@ def buildFolderView():
     userFolders = Frame(frame, bg="#404040")
 
     for i in fdr.loadFolders():
-        button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', borderwidth=0, activebackground='#666666', foreground='white')
+        button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', activebackground='#666666', foreground='white')
         button.pack(pady=(0, 10))
         
     userFolders.pack()
@@ -85,6 +85,6 @@ def addCommand():
             add.destroy()
             updateFolderView()
         else:
-            messagebox.showinfo("", "Numero Maximo de pastas atingido!", parent=frame)
+            messagebox.showinfo("", "Maximum number of folders reached!", parent=frame)
     else:
         errorLabel.config(text="Invalid Name")

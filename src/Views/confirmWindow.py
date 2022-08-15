@@ -8,8 +8,8 @@ def showConfirmWindow(parent, msg, function):
     
     msg = Label(confirmmenu, text=msg)
     
-    yesButton = Button(confirmmenu, text="Sim", command=function)
-    noButton = Button(confirmmenu, text="Não", command=leaveConfirm)
+    yesButton = Button(confirmmenu, text="Yes", command=function)
+    noButton = Button(confirmmenu, text="No", command=leaveConfirm)
     
     msg.pack(expand=True, pady=(20, 0), padx=20)
     noButton.pack(expand=True, side=LEFT, pady=(20, 20))

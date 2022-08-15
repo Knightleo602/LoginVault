@@ -47,13 +47,13 @@ def create(root):
     password = entryPassword.get()
     if checkString(username) and checkString(password):
         if saveMasterToTable(username, password):
-            errorLabel.config(text="Usuario criado com sucesso!")
+            errorLabel.config(text="User successfully created!")
             frame.destroy()
             createMainView(root)
         else:
-            errorLabel.config(text="Usuario ja existe!")
+            errorLabel.config(text="User already exists!")
     else:
-        errorLabel.config(text="Nome ou senha Invalido!")
+        errorLabel.config(text="Invalid name or password!")
 
 def showPasswd():
     global passwdState, showPasswdButton, visiblePwdImage, hiddenPwdImage

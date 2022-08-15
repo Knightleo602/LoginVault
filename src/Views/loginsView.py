@@ -1,5 +1,4 @@
 from tkinter import *
-from turtle import bgcolor
 
 from Controller.loginsController import loadLogins, saveLoginToTable
 import Controller.foldersController as fdr
@@ -21,7 +20,7 @@ def updateLoginsView():
 
 def buildLoginsView():
     global frame
-    frame.columnconfigure((2, 3, 4), weight=5, minsize=20) # o 6 e a quantidade de colunas
+    frame.columnconfigure((2, 3, 4), weight=5, minsize=20)
     frame.columnconfigure(1, weight=1, minsize=55)
     
     labelMain = Label(frame, text=fdr.getSelectedFolder().getName(), font=("", 15), highlightthickness=1, highlightbackground='black')    
@@ -30,12 +29,9 @@ def buildLoginsView():
     adicionar = Button(frame, text="+", command=lambda: showAddWindow(frame), highlightthickness=1, highlightbackground='black')
     adicionar.grid(row=0, column=3, padx=(0, 20), columnspan=3, sticky=E)    
     
-    labelUserN = Label(frame, text="UserName", highlightthickness=1, highlightbackground='black')
-    labelPasswd = Label(frame, text="Senhas", highlightthickness=1, highlightbackground='black')
+    labelUserN = Label(frame, text="UserNames", highlightthickness=1, highlightbackground='black')
+    labelPasswd = Label(frame, text="Passwords", highlightthickness=1, highlightbackground='black')
     
-    # coluna 1 = username
-    # coluna 3 = senhas
-    # todos os logins criados vao aparecer na quarta linha pra frente
     labelUserN.grid(row=2, column=1, padx=(20, 20), pady=(0, 10), columnspan=2, sticky=EW)
     labelPasswd.grid(row=2, column=3, padx=(0, 20), pady=(0, 10), columnspan=2, sticky=EW)
     
