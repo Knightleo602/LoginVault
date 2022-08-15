@@ -13,9 +13,9 @@ root.title("Login Vault")
 root.minsize(width=150, height=150)
 root.geometry("500x500")
 
-root.iconphoto(False, PhotoImage(file="./img/vaulticon.png"))
+root.iconphoto(False, PhotoImage(file="img/vaulticon.png"))
 
-dblocation = "./src/Models/.database.db"
+dblocation = "src/Models/.database.db"
 
 root.config()
 
