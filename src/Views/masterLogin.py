@@ -41,7 +41,7 @@ def masterLoginView(parent):
     
     global errorLabel
     errorLabel = Label(frame)
-    errorLabel.pack()
+    errorLabel.pack(pady=15)
     
     frame.pack()
 

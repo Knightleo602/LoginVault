@@ -32,13 +32,13 @@ def buildFolderView():
     newFolder = Button(frame, text="Nova Pasta", command=criarNovaPasta)
     
     labelMain.pack(anchor=NW, pady=(10, 30), padx=10)
-    labelPastas.pack(anchor=NW, pady=(10, 15), padx=20)
+    labelPastas.pack(anchor=NW, pady=(10, 20), padx=20)
     
     userFolders = Frame(frame, bg="#404040")
 
     for i in fdr.loadFolders():
-        button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', borderwidth=0, activebackground='#8D8D8D', foreground='white')
-        button.pack()
+        button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', borderwidth=0, activebackground='#666666', foreground='white')
+        button.pack(pady=(0, 10))
         
     userFolders.pack()
     

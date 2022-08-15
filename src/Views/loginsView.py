@@ -1,11 +1,13 @@
 from tkinter import *
+from turtle import bgcolor
 
 from Controller.loginsController import loadLogins, saveLoginToTable
 import Controller.foldersController as fdr
+from functools import partial
 
 def createLoginsView(parent):
     global frame
-    frame = Frame(parent, bg='#1e8f77')
+    frame = Frame(parent, bg='#666666')
     
     buildLoginsView()
     
@@ -22,14 +24,14 @@ def buildLoginsView():
     frame.columnconfigure((2, 3, 4), weight=5, minsize=20) # o 6 e a quantidade de colunas
     frame.columnconfigure(1, weight=1, minsize=55)
     
-    labelMain = Label(frame, text=fdr.getSelectedFolder().getName(), font=("", 15))    
-    labelMain.grid(row=0, column=0, pady=(20, 18), padx=(5, 1), columnspan=3, sticky=W)
+    labelMain = Label(frame, text=fdr.getSelectedFolder().getName(), font=("", 15), highlightthickness=1, highlightbackground='black')    
+    labelMain.grid(row=0, column=0, pady=(20, 18), padx=(5, 1), columnspan=3, sticky=EW)
     
-    adicionar = Button(frame, text="+", command=lambda: showAddWindow(frame))
+    adicionar = Button(frame, text="+", command=lambda: showAddWindow(frame), highlightthickness=1, highlightbackground='black')
     adicionar.grid(row=0, column=3, padx=(0, 20), columnspan=3, sticky=E)    
     
-    labelUserN = Label(frame, text="UserName")
-    labelPasswd = Label(frame, text="Senhas")
+    labelUserN = Label(frame, text="UserName", highlightthickness=1, highlightbackground='black')
+    labelPasswd = Label(frame, text="Senhas", highlightthickness=1, highlightbackground='black')
     
     # coluna 1 = username
     # coluna 3 = senhas
@@ -38,12 +40,47 @@ def buildLoginsView():
     labelPasswd.grid(row=2, column=3, padx=(0, 20), pady=(0, 10), columnspan=2, sticky=EW)
     
     rowCount = 3
-    
     for i in loadLogins():
-        Label(frame, text=i.getUserName()).grid(row=rowCount, column=1, padx=(20, 20), pady=(10, 0), columnspan=2, sticky=EW)
-        Label(frame, text="ssss").grid(row=rowCount, column=3, padx=(0, 20), pady=(10, 0), columnspan=2, sticky=EW)
+        name = Label(frame, text=i.getUserName(), highlightthickness=2, highlightbackground='black', bg="#ADADAD", foreground='black')
+        name.grid(row=rowCount, column=1, padx=(20, 20), pady=(10, 0), columnspan=2, sticky=EW)
+        
+        name.bind("<Button-1>", partial(copyToClipboard, i.getUserName(), name))
+        name.bind("<Enter>", partial(changeNameBg, name, True))
+        name.bind("<Leave>", partial(changeNameBg, name, False))
+        
+        
+        passLabel = Label(frame, text=i.getPassword(), bg='#212121', foreground='#212121', highlightthickness=3, highlightbackground='black')
+        passLabel.grid(row=rowCount, column=3, padx=(0, 20), pady=(10, 0), columnspan=2, sticky=EW)
+        
+        passLabel.bind("<Button-1>", partial(copyToClipboard, i.getPassword(), passLabel))
+        passLabel.bind("<Enter>", partial(changePasswordBg, passLabel, True))
+        passLabel.bind("<Leave>", partial(changePasswordBg, passLabel, False))
         rowCount += 1
     
+    global message
+    message = Label(frame, bg="#666666", fg="white")
+    message.grid(row=rowCount, column=1, columnspan=4, pady=(100, 0), sticky=S)
+        
+def copyToClipboard(text, label, event):
+    frame.clipboard_clear()
+    frame.clipboard_append(text)
+    fg = label["foreground"]
+    bg = label["bg"]
+    message.config(text="Copied to Clipboard", bg="#59B663")
+    label.config(bg='#BFBFBF', foreground='black')
+    frame.after(100, lambda: label.config(bg=bg, foreground=fg))
+    frame.after(5000, lambda: message.config(text="", bg="#666666"))
+    
+def changeNameBg(label, state, event):
+    if state:
+        label.config(bg="white", foreground='#212121', highlightthickness=3)
+    else:
+        label.config(bg='#ADADAD', foreground='black', highlightthickness=2)
+def changePasswordBg(label, state, event):
+    if state:
+        label.config(bg="#666666", foreground='white')
+    else:
+        label.config(bg='#212121', foreground='#212121')
 
 passwdState = False
 

@@ -1,9 +1,9 @@
 class Folder:
     
-    def __init__(self, id, name, logins=[]):
+    def __init__(self, id, name, aescipher):
         self.id = id
         self.name = name
-        self.logins = logins
+        self.aescipher = aescipher
     
     def setName(self, name):
         self.name = name
@@ -13,6 +13,3 @@ class Folder:
         
     def getId(self):
         return self.id
-    
-    def addLogin(self, login):
-        self.logins.append(login)
