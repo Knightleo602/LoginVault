@@ -130,12 +130,12 @@ def showPasswd():
     global passwdState, showPasswdButton, visiblePwdImage, hiddenPwdImage
     if passwdState:
         passwdState = False
-        entryPassword.config(show="")
-        showPasswdButton.config(image=hiddenPwdImage)
-    else:
-        passwdState = True
         bullet = "\u2022"
         entryPassword.config(show=bullet)
         showPasswdButton.config(image=visiblePwdImage)
+    else:
+        passwdState = True        
+        entryPassword.config(show="")
+        showPasswdButton.config(image=hiddenPwdImage)
     
 

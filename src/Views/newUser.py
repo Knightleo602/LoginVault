@@ -10,34 +10,34 @@ def createLoginView(parent):
     frame = Frame(parent)
     
     labelMain = Label(frame, text="Welcome!", font=("", 15))
-    labelMain.grid(row=0, column=0, columnspan=3, pady=17)
+    labelMain.pack(pady=20)
     
     labelMain = Label(frame, text="Create a new account to get started.", font=("", 15))
-    labelMain.grid(row=1, column=0, columnspan=3, pady=17)
+    labelMain.pack(pady=(20, 25))
     
     global entryUsername
     labelUsername = Label(frame, text="Username:", font=("", 10))
-    labelUsername.grid(row=2, column=0, pady=(10, 10), padx=(6, 0))
+    labelUsername.pack()
     entryUsername = Entry(frame)
-    entryUsername.grid(row=2, column=1, sticky=EW, padx=(0, 9), pady=(10, 10))
+    entryUsername.pack(pady=(0, 4))
     
     global entryPassword, hiddenPwdImage, visiblePwdImage, showPasswdButton
     hiddenPwdImage = PhotoImage(file="./img/hiddenPasswdSmall.png", width=15, height=15)
     visiblePwdImage = PhotoImage(file="./img/visiblePasswdSmall.png", width=15, height=15)
     labelPassword = Label(frame, text="Password:", font=("", 10))
-    labelPassword.grid(row=3, column=0, pady=(0, 10), padx=(6, 0))
+    labelPassword.pack()
     bullet = "\u2022"
     entryPassword = Entry(frame, show=bullet)
-    entryPassword.grid(row=3, column=1, sticky=EW, padx=(0, 9), pady=(0, 10))
+    entryPassword.pack()
     showPasswdButton = Button(frame, command=showPasswd, image=hiddenPwdImage)
-    showPasswdButton.grid(row=3, column=1, pady=(0, 10), sticky=E, padx=(0, 9))
+    showPasswdButton.place(in_=entryPassword, relx=1.0, x=-20)
 
     add = Button(frame, text="Create", command=lambda: create(parent))
-    add.grid(row=4, column=0, columnspan=3, pady=10, ipadx=25)
+    add.pack(pady=(25, 15))
     
     global errorLabel
     errorLabel = Label(frame)
-    errorLabel.grid(row=5, column=0, sticky=EW, columnspan=2)
+    errorLabel.pack()
     
     frame.pack()
     
