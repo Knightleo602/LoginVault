@@ -1,7 +1,18 @@
 from tkinter import *
+
+from .menubar import createMenuBar
+
+from .folderview import createFolderView
 from .addWindow import showAddWindow
 
 def createMainView(parent):
+    
+    paned = PanedWindow(parent, sashwidth=3, bg="#5D5D5D")
+    paned.pack(fill=BOTH, expand=True)
+    
+    createMenuBar(parent)
+    createFolderView(paned)
+    
     frame = Frame(parent, bg='#1e8f77')
     
     frame.columnconfigure((2, 3, 4), weight=5, minsize=20) # o 6 e a quantidade de colunas
@@ -16,7 +27,7 @@ def createMainView(parent):
     labelUserN = Label(frame, text="UserName")
     labelPasswd = Label(frame, text="Senhas")
     
-    # coluna 1 = usernamea
+    # coluna 1 = username
     # coluna 3 = senhas
     # todos os logins criados vao aparecer na quarta linha pra frente
     labelUserN.grid(row=2, column=1, padx=(20, 20), columnspan=2, sticky=EW)
@@ -24,8 +35,9 @@ def createMainView(parent):
     
     # expandButton = Button(frame, text="\/", command=expandLogin)
     
-    parent.add(frame, minsize=150)
+    paned.add(frame, minsize=150)
     #frame.pack(side="left", fill="both", expand=True)
+    return paned
     
 def getLogins(): # a ideia e ele pega e retorna os logins como um frame 
     ...

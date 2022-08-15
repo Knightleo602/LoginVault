@@ -1,18 +1,18 @@
 from tkinter import *
-from Controller.masterController import saveMasterToTable
-from Controller.loginsController import checkString
+from Controller.masterController import masterLogin
 from Views.mainview import createMainView
+from Controller.loginsController import checkString
 
 passwdState = False
 
-def createLoginView(parent):
+def masterLoginView(parent):
     global frame
     frame = Frame(parent)
     
     labelMain = Label(frame, text="Welcome!", font=("", 15))
     labelMain.grid(row=0, column=0, columnspan=3, pady=17)
     
-    labelMain = Label(frame, text="Create a new account to get started.", font=("", 15))
+    labelMain = Label(frame, text="Please login to your account", font=("", 15))
     labelMain.grid(row=1, column=0, columnspan=3, pady=17)
     
     global entryUsername
@@ -32,29 +32,28 @@ def createLoginView(parent):
     showPasswdButton = Button(frame, command=showPasswd, image=hiddenPwdImage)
     showPasswdButton.grid(row=3, column=1, pady=(0, 10), sticky=E, padx=(0, 9))
 
-    add = Button(frame, text="Create", command=lambda: create(parent))
-    add.grid(row=4, column=0, sticky=EW, columnspan=2)
+    loginButton = Button(frame, text="Login", command=lambda: login(parent))
+    loginButton.grid(row=4, column=0, sticky=EW, columnspan=2)
     
     global errorLabel
     errorLabel = Label(frame)
     errorLabel.grid(row=5, column=0, sticky=EW, columnspan=2)
     
     frame.pack()
-    
-def create(root):
+
+def login(root):
     global errorLabel, frame
     username = entryUsername.get()
     password = entryPassword.get()
     if checkString(username) and checkString(password):
-        if saveMasterToTable(username, password):
-            errorLabel.config(text="Usuario criado com sucesso!")
+        if masterLogin(username, password):
             frame.destroy()
             createMainView(root)
         else:
-            errorLabel.config(text="Usuario ja existe!")
+            errorLabel.config(text="Usuario ou senha incorretos!")
     else:
         errorLabel.config(text="Uso de characteres não permitidos!")
-
+    
 def showPasswd():
     global passwdState, showPasswdButton, visiblePwdImage, hiddenPwdImage
     if passwdState:
@@ -67,5 +66,3 @@ def showPasswd():
         bullet = "\u2022"
         entryPassword.config(show="")
         showPasswdButton.config(image=visiblePwdImage)
-    
-    

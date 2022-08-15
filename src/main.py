@@ -1,12 +1,12 @@
 from tkinter import *
-from Views.folderview import createFolderView
-from Views.menubar import createMenuBar
-from Views.mainview import createMainView
+from Controller.database import *
 from Views.confirmWindow import showConfirmWindow
-from os import path
+from Views.masterLogin import masterLoginView
+from Views.newUser import createLoginView
 
 def exit():
     global root
+    closeDatabase()
     root.destroy()
 
 root = Tk()
@@ -14,16 +14,12 @@ root.title("Login Vault")
 root.minsize(width=150, height=150)
 root.geometry("500x500")
 
-if not path.isfile("Models/settings.json"):
-    ...
+dblocation = "./src/Models/database.db"
 
-paned = PanedWindow(root, sashwidth=3, bg="#5D5D5D")
-
-paned.pack(fill=BOTH, expand=True)
-
-createFolderView(paned)
-createMainView(paned)
-createMenuBar(root)
+if connectDatabase(dblocation):
+    masterLoginView(root)
+else:
+    createLoginView(root)
 
 root.protocol('WM_DELETE_WINDOW', lambda: showConfirmWindow(root, "Tem certeza que ser sair?", exit))
 

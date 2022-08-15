@@ -1,6 +1,7 @@
 class Folder:
     
-    def __init__(self, name, logins=[]):
+    def __init__(self, id, name, logins=[]):
+        self.id = id
         self.name = name
         self.logins = logins
     
