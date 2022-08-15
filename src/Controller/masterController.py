@@ -1,5 +1,5 @@
 from passlib.hash import bcrypt
-from Controller.crypt import AESCipher, getHash
+from Controller.crypt import getHash
 import Controller.database as db
 from .foldersController import createDefaultFolders
 from Models.masterModel import Master

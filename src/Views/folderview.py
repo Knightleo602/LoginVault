@@ -38,7 +38,7 @@ def buildFolderView():
 
     for i in fdr.loadFolders():
         button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', activebackground='#666666', foreground='white')
-        button.pack(pady=(0, 10))
+        button.pack(pady=(0, 10), fil=BOTH)
         
     userFolders.pack()
     

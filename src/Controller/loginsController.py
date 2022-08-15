@@ -1,7 +1,6 @@
 import Controller.database as db
 from Models.loginsModel import login
 import Controller.foldersController as fdr
-import Controller.masterController as mr
 
 def saveLoginToTable(name, password, website, notes, folderId):
     cursor = db.connection.cursor()

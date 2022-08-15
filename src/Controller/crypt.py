@@ -9,7 +9,6 @@ import hashlib
 # pip install bcrypt
 
 # https://stackoverflow.com/a/21928790 
-# codigo original aqui
 
 class AESCipher(object):
 

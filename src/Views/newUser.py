@@ -32,6 +32,12 @@ def createLoginView(parent):
     showPasswdButton = Button(frame, command=showPasswd, image=hiddenPwdImage)
     showPasswdButton.place(in_=entryPassword, relx=1.0, x=-20)
 
+    global entryConfirmPassword
+    labelConfirmPassword = Label(frame, text="Confirm Password:", font=("", 10))
+    labelConfirmPassword.pack()
+    entryConfirmPassword = Entry(frame, show=bullet)
+    entryConfirmPassword.pack()
+
     add = Button(frame, text="Create", command=lambda: create(parent))
     add.pack(pady=(25, 15))
     
@@ -45,13 +51,17 @@ def create(root):
     global errorLabel, frame
     username = entryUsername.get().strip()
     password = entryPassword.get()
+    confirmpasswd = entryConfirmPassword.get()
     if checkString(username) and checkString(password):
-        if saveMasterToTable(username, password):
-            errorLabel.config(text="User successfully created!")
-            frame.destroy()
-            createMainView(root)
+        if password == confirmpasswd:
+            if saveMasterToTable(username, password):
+                errorLabel.config(text="User successfully created!")
+                frame.destroy()
+                createMainView(root)
+            else:
+                errorLabel.config(text="User already exists!")
         else:
-            errorLabel.config(text="User already exists!")
+            errorLabel.config(text="Password doesn't match!")
     else:
         errorLabel.config(text="Invalid name or password!")
 
