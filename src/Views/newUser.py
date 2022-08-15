@@ -1,7 +1,7 @@
 from tkinter import *
 from Controller.masterController import saveMasterToTable
-from Controller.loginsController import checkString
 from Views.mainview import createMainView
+from Controller.extraFunctions import checkString
 
 passwdState = False
 
@@ -17,9 +17,9 @@ def createLoginView(parent):
     
     global entryUsername
     labelUsername = Label(frame, text="Username:", font=("", 10))
-    labelUsername.grid(row=2, column=0, pady=(0, 10), padx=(6, 0))
+    labelUsername.grid(row=2, column=0, pady=(10, 10), padx=(6, 0))
     entryUsername = Entry(frame)
-    entryUsername.grid(row=2, column=1, sticky=EW, padx=(0, 9), pady=(0, 10))
+    entryUsername.grid(row=2, column=1, sticky=EW, padx=(0, 9), pady=(10, 10))
     
     global entryPassword, hiddenPwdImage, visiblePwdImage, showPasswdButton
     hiddenPwdImage = PhotoImage(file="./img/hiddenPasswdSmall.png", width=15, height=15)
@@ -33,7 +33,7 @@ def createLoginView(parent):
     showPasswdButton.grid(row=3, column=1, pady=(0, 10), sticky=E, padx=(0, 9))
 
     add = Button(frame, text="Create", command=lambda: create(parent))
-    add.grid(row=4, column=0, sticky=EW, columnspan=2)
+    add.grid(row=4, column=0, columnspan=3, pady=10, ipadx=25)
     
     global errorLabel
     errorLabel = Label(frame)
@@ -43,7 +43,7 @@ def createLoginView(parent):
     
 def create(root):
     global errorLabel, frame
-    username = entryUsername.get()
+    username = entryUsername.get().strip()
     password = entryPassword.get()
     if checkString(username) and checkString(password):
         if saveMasterToTable(username, password):
@@ -53,7 +53,7 @@ def create(root):
         else:
             errorLabel.config(text="Usuario ja existe!")
     else:
-        errorLabel.config(text="Uso de characteres não permitidos!")
+        errorLabel.config(text="Nome ou senha Invalido!")
 
 def showPasswd():
     global passwdState, showPasswdButton, visiblePwdImage, hiddenPwdImage

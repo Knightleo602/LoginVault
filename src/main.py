@@ -6,7 +6,6 @@ from Views.newUser import createLoginView
 
 def exit():
     global root
-    closeDatabase()
     root.destroy()
 
 root = Tk()

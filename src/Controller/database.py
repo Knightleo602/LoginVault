@@ -8,18 +8,6 @@ def createTables():
     cursor.execute('''CREATE TABLE Folders(id_folder INTEGER PRIMARY KEY, name TEXT, id_master INTEGER, FOREIGN KEY (id_master) REFERENCES Masters(id_master))''')
     cursor.execute('''CREATE TABLE Logins(id_logins INTEGER PRIMARY KEY, name TEXT, password TEXT, website TEXT, notes TEXT, id_folder INTEGER, FOREIGN KEY (id_folder) REFERENCES Folders(id_folder))''')
     connection.commit()
-    
-def saveFolderToTable(name):
-    global connection
-    cursor = connection.cursor()
-    data = [(name)]
-    cursor.execute('INSERT INTO Folders(name) VALUES (?)', data)
-
-def saveLoginToTable(name, password, website, notes, folderId):
-    global connection
-    cursor = connection.cursor()
-    data = [(name, password, website, notes, folderId)]
-    cursor.execute('INSERT INTO Logins(name, password, website, notes, id_folder) VALUES (?, ?, ?, ?, ?)', data)
 
 def connectDatabase(location):
     global connection

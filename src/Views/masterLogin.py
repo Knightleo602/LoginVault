@@ -1,7 +1,8 @@
 from tkinter import *
 from Controller.masterController import masterLogin
 from Views.mainview import createMainView
-from Controller.loginsController import checkString
+from Controller.extraFunctions import checkString
+from Views.newUser import createLoginView
 
 passwdState = False
 
@@ -33,13 +34,20 @@ def masterLoginView(parent):
     showPasswdButton.grid(row=3, column=1, pady=(0, 10), sticky=E, padx=(0, 9))
 
     loginButton = Button(frame, text="Login", command=lambda: login(parent))
-    loginButton.grid(row=4, column=0, sticky=EW, columnspan=2)
+    loginButton.grid(row=4, column=0, sticky=EW, columnspan=2, pady=(10, 5))
+    
+    createNewButton = Button(frame, text="Create new Account", command=lambda: moveToCreateAccount(parent))
+    createNewButton.grid(row=5, column=0, columnspan=2, pady=15)
     
     global errorLabel
     errorLabel = Label(frame)
-    errorLabel.grid(row=5, column=0, sticky=EW, columnspan=2)
+    errorLabel.grid(row=6, column=0, sticky=EW, columnspan=2)
     
     frame.pack()
+
+def moveToCreateAccount(parent):
+    frame.destroy()
+    createLoginView(parent)
 
 def login(root):
     global errorLabel, frame
@@ -51,6 +59,7 @@ def login(root):
             createMainView(root)
         else:
             errorLabel.config(text="Usuario ou senha incorretos!")
+            entryUsername.config(textvariable="")
     else:
         errorLabel.config(text="Uso de characteres não permitidos!")
     

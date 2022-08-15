@@ -11,5 +11,8 @@ class Folder:
     def getName(self):
         return self.name;
         
+    def getId(self):
+        return self.id
+    
     def addLogin(self, login):
         self.logins.append(login)

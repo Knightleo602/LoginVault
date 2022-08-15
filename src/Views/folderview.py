@@ -1,5 +1,10 @@
 from tkinter import *
-from turtle import width
+from tkinter import messagebox
+from Controller.extraFunctions import checkString
+import Controller.foldersController as fdr
+import Controller.masterController as master
+from .loginsView import updateLoginsView
+from functools import partial
 
 row = -1
 resizeState = False
@@ -8,20 +13,40 @@ cursor = ''
 def createFolderView(parent):
     global frame
     frame = PanedWindow(parent, sashwidth=4, sashrelief=SUNKEN, bg='#404040')
-    labelMain = Label(frame, text="Vault", fg='#212121')
-    labelPastas = Label(frame, text="Pastas: ")
+
+    buildFolderView()
     
-    # aqui vai ser dai pra mostrar todas as pastas criadas
-    # A unica pasta que vai ter de inicio e o Created
+    parent.add(frame, minsize=50, width=150)
+    
+def updateFolderView():
+    global frame
+    for i in frame.winfo_children():
+        i.destroy()
+    buildFolderView()
+    
+def buildFolderView():
+    global frame
+    labelMain = Label(frame, text=master.loggedMaster.name + "'s vault", fg='#212121')
+    labelPastas = Label(frame, text="Pastas: ")
     
     newFolder = Button(frame, text="Nova Pasta", command=criarNovaPasta)
     
     labelMain.pack(anchor=NW, pady=(10, 30), padx=10)
     labelPastas.pack(anchor=NW, pady=(10, 15), padx=20)
+    
+    userFolders = Frame(frame, bg="#404040")
+
+    for i in fdr.loadFolders():
+        button = Button(userFolders, text=i.getName(), command=partial(setSelectedFolder, i.getId()), bg='#404040', borderwidth=0, activebackground='#8D8D8D', foreground='white')
+        button.pack()
+        
+    userFolders.pack()
+    
     newFolder.pack(side=BOTTOM, pady=(50, 10))
 
-    parent.add(frame, minsize=50, width=150)
-    #frame.pack(side="left", fill="y", ipadx=20)
+def setSelectedFolder(folderId):
+    fdr.selectedFolder = folderId
+    updateLoginsView()
     
 def rowCount(add = 1): # pra fazer certinho as linhas
     global row
@@ -29,5 +54,37 @@ def rowCount(add = 1): # pra fazer certinho as linhas
     return row
 
 def criarNovaPasta():
-    ...
-            
+    global frame, add
+    add = Toplevel(frame)
+    add.title("")
+    
+    name = Label(add, text="Name")
+    name.pack()
+    
+    global entry
+    entry = Entry(add)
+    entry.pack()
+    
+    button = Button(add, text="Create", command=addCommand)
+    button.pack()
+    
+    global errorLabel
+    errorLabel = Label(add)
+    errorLabel.pack()
+    
+    add.grab_set()
+    add.attributes('-topmost', True)
+    
+    add.mainloop()
+
+def addCommand():
+    global entry, add
+    name = entry.get()
+    if checkString(name):
+        if fdr.saveFolderToTable(name):
+            add.destroy()
+            updateFolderView()
+        else:
+            messagebox.showinfo("", "Numero Maximo de pastas atingido!", parent=frame)
+    else:
+        errorLabel.config(text="Invalid Name")
