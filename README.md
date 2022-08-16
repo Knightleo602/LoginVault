@@ -21,7 +21,7 @@
  ```
  git clone https://github.com/Knightleo602/LoginVault.git
 
- python LocalVault/src/main.py
+ python LoginVault/src/main.py
  ```
 
  3) ao abrir pela primeira vez, voce devera criar uma nova conta mestre
