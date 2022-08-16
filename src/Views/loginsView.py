@@ -1,8 +1,10 @@
+import pathlib
 from tkinter import *
 
 from Controller.loginsController import loadLogins, saveLoginToTable
 import Controller.foldersController as fdr
 from functools import partial
+import Models.globals as globals
 
 def createLoginsView(parent):
     global frame
@@ -83,6 +85,7 @@ passwdState = False
 def showAddWindow(parent):
     rowAmount = 7
     global add, entryUsername, entryPassword, entryWebsite, clickedFolder, entryNotes, hiddenPwdImage, visiblePwdImage, showPasswdButton
+    path = str(pathlib.Path(__file__).parent.parent.resolve())
     add = Toplevel(parent)
     add.title("")
     add.columnconfigure((0, 1), weight=1)
@@ -96,8 +99,8 @@ def showAddWindow(parent):
     entryUsername = Entry(add)
     entryUsername.grid(row=1, column=1, sticky=EW, padx=(0, 9), pady=(0, 10))
     
-    hiddenPwdImage = PhotoImage(file="./img/hiddenPasswdSmall.png", width=15, height=15)
-    visiblePwdImage = PhotoImage(file="./img/visiblePasswdSmall.png", width=15, height=15)
+    hiddenPwdImage = PhotoImage(file=globals.currentpath+"/img/hiddenPasswdSmall.png", width=15, height=15)
+    visiblePwdImage = PhotoImage(file=globals.currentpath+"/img/visiblePasswdSmall.png", width=15, height=15)
     labelPassword = Label(add, text="Password:", font=("", 10))
     labelPassword.grid(row=2, column=0, pady=(0, 10), padx=(6, 0))
     bullet = "\u2022"
@@ -165,10 +168,10 @@ def showPasswd():
         passwdState = False
         bullet = "\u2022"
         entryPassword.config(show=bullet)
-        showPasswdButton.config(image=visiblePwdImage)
+        showPasswdButton.config(image=hiddenPwdImage)
     else:
         passwdState = True        
         entryPassword.config(show="")
-        showPasswdButton.config(image=hiddenPwdImage)
+        showPasswdButton.config(image=visiblePwdImage)
     
 

@@ -1,8 +1,10 @@
+import pathlib
 from tkinter import *
 from Controller.masterController import masterLogin
 from Views.mainview import createMainView
 from Controller.extraFunctions import checkString
 from Views.newUser import createLoginView
+import Models.globals as globals
 
 passwdState = False
 
@@ -23,8 +25,8 @@ def masterLoginView(parent):
     entryUsername.pack(pady=(0, 4))
     
     global entryPassword, hiddenPwdImage, visiblePwdImage, showPasswdButton
-    hiddenPwdImage = PhotoImage(file="./img/hiddenPasswdSmall.png", width=15, height=15)
-    visiblePwdImage = PhotoImage(file="./img/visiblePasswdSmall.png", width=15, height=15)
+    hiddenPwdImage = PhotoImage(file=globals.currentpath+"/img/hiddenPasswdSmall.png", width=15, height=15)
+    visiblePwdImage = PhotoImage(file=globals.currentpath+"/img/visiblePasswdSmall.png", width=15, height=15)
     labelPassword = Label(frame, text="Password:", font=("", 10))
     labelPassword.pack()
     bullet = "\u2022"

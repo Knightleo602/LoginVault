@@ -4,6 +4,7 @@ from Views.confirmWindow import showConfirmWindow
 from Views.masterLogin import masterLoginView
 from Views.newUser import createLoginView
 import pathlib
+import Models.globals as globals
 
 def exit():
     global root
@@ -13,9 +14,9 @@ root = Tk()
 root.title("Login Vault")
 root.minsize(width=150, height=150)
 root.geometry("500x500")
-currentpath = str(pathlib.Path(__file__).parent.parent.resolve())
-root.iconphoto(False, PhotoImage(file=currentpath+"/img/vaulticon.png"))
-dblocation = currentpath + "/src/Models/.database.db"
+globals.currentpath = str(pathlib.Path(__file__).parent.parent.resolve())
+root.iconphoto(False, PhotoImage(file=globals.currentpath+"/img/vaulticon.png"))
+dblocation = globals.currentpath + "/src/Models/.database.db"
 
 root.config()
 
