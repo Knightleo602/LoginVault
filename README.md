@@ -1,6 +1,6 @@
 # LoginVault
 
-![Create New Account Page](img/vaulticon.png "Create Account")
+![Logo](img/vaulticon.png)
 
  Um aplicativo no python para armazenar dados de varias contas
 
